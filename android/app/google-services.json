@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "248089981620",
+    "project_id": "daftarbuku-b3857",
+    "storage_bucket": "daftarbuku-b3857.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:248089981620:android:be3aa643b671f2a9699de1",
+        "android_client_info": {
+          "package_name": "com.polinema.daftarbuku"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "248089981620-safdgq48th95qeuen7pdjqa5mhg1ttm8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDl4hQhXBuNjvCfVTk0TuxGiPcCMu8-_fU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "248089981620-safdgq48th95qeuen7pdjqa5mhg1ttm8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
