@@ -1,5 +1,8 @@
+import 'package:daftar_buku/buku/homeBuku.dart';
 import 'package:daftar_buku/register_page.dart';
 import 'package:flutter/material.dart';
+import 'homaPage.dart';
+import 'kategori/homeKategori.dart';
 import 'login_page.dart';
 
 void main() => runApp(MyApp());
@@ -12,12 +15,17 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Login',
+      title: 'App Login',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.yellow,
       ),
       home: LoginPage(),
-      routes: routes,
+      routes: {
+        RegisterPage.tag: (context) => RegisterPage(),
+        Home.home: (_) => Home(),
+        HomeBuku.bukuPage: (_) => HomeBuku(),
+        HomeKategori.kategoriPage: (_) => HomeKategori(),
+      },
     );
   }
 }

@@ -7,12 +7,20 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:248089981620:android:be3aa643b671f2a9699de1",
+        "mobilesdk_app_id": "1:248089981620:android:217ab10c3b80ede3699de1",
         "android_client_info": {
-          "package_name": "com.polinema.daftarbuku"
+          "package_name": "com.example.daftar_buku"
         }
       },
       "oauth_client": [
+        {
+          "client_id": "248089981620-mmn7tqtajhp4go7auaqe4jm7nd5vjru8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.daftar_buku",
+            "certificate_hash": "17a13d181da1f338dea49673a4cbb67696678b3b"
+          }
+        },
         {
           "client_id": "248089981620-safdgq48th95qeuen7pdjqa5mhg1ttm8.apps.googleusercontent.com",
           "client_type": 3

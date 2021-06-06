@@ -23,8 +23,37 @@ class _LoginPageState extends State<LoginPage> {
             shrinkWrap: true,
             padding: EdgeInsets.only(left: 24.0, right: 24.0),
             children: <Widget>[
-              FlutterLogo(size: 100),
-              SizedBox(height: 48),
+              Row(
+                children: <Widget>[
+                  Text(
+                    'Welcome.',
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 48,
+                      fontWeight: FontWeight.w900,
+                      letterSpacing: 1.5,
+                    ),
+                  ),
+                  SizedBox(width: 16),
+                  Expanded(
+                    child: Divider(thickness: 3, color: Colors.black),
+                  ),
+                  SizedBox(width: 40),
+                ],
+              ),
+              Text(
+                'Daftar Buku App',
+                style: TextStyle(
+                    color: Colors.amber,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 36,
+                    letterSpacing: 5),
+              ),
+              // Spasi
+              SizedBox(height: 30),
+              // Icon
+              Icon(Icons.book, size: 100, color: Colors.amber),
+              SizedBox(height: 30),
               _formLogin(),
               _signInButton(),
               _register(),
@@ -43,7 +72,7 @@ class _LoginPageState extends State<LoginPage> {
         children: <Widget>[
           Text(
             'Email',
-            style: TextStyle(color: Colors.black54),
+            style: TextStyle(color: Colors.black),
           ),
           SizedBox(height: 8),
           TextFormField(
@@ -62,7 +91,7 @@ class _LoginPageState extends State<LoginPage> {
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(8),
                 borderSide: BorderSide(
-                  color: Colors.black54,
+                  color: Colors.black,
                 ),
               ),
               contentPadding: EdgeInsets.symmetric(vertical: 4, horizontal: 16),
@@ -71,7 +100,7 @@ class _LoginPageState extends State<LoginPage> {
           SizedBox(height: 16),
           Text(
             'Password',
-            style: TextStyle(color: Colors.black54),
+            style: TextStyle(color: Colors.black),
           ),
           SizedBox(height: 8),
           TextFormField(
@@ -90,12 +119,13 @@ class _LoginPageState extends State<LoginPage> {
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(8),
                 borderSide: BorderSide(
-                  color: Colors.black54,
+                  color: Colors.black,
                 ),
               ),
               contentPadding: EdgeInsets.symmetric(vertical: 4, horizontal: 16),
             ),
           ),
+          SizedBox(height: 20),
           Container(
             width: double.infinity,
             child: RaisedButton(
@@ -128,6 +158,30 @@ class _LoginPageState extends State<LoginPage> {
               padding: EdgeInsets.symmetric(vertical: 16),
             ),
           ),
+          SizedBox(height: 20),
+          Row(
+            children: <Widget>[
+              Expanded(
+                child: Divider(
+                  thickness: 1,
+                  color: Colors.black54,
+                ),
+              ),
+              SizedBox(width: 20),
+              Text(
+                'OR',
+                style: TextStyle(color: Colors.black54),
+              ),
+              SizedBox(width: 20),
+              Expanded(
+                child: Divider(
+                  thickness: 1,
+                  color: Colors.black54,
+                ),
+              ),
+            ],
+          ),
+          SizedBox(height: 20),
         ],
       ),
     );
@@ -147,7 +201,7 @@ class _LoginPageState extends State<LoginPage> {
 
   Widget _signInButton() {
     return OutlineButton(
-      splashColor: Colors.grey,
+      splashColor: Colors.black,
       onPressed: () {
         signInWithGoogle().then((result) {
           if (result != null) {
@@ -158,12 +212,13 @@ class _LoginPageState extends State<LoginPage> {
                 },
               ),
             );
+            SizedBox(height: 20);
           }
         });
       },
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
       highlightElevation: 0,
-      borderSide: BorderSide(color: Colors.grey),
+      borderSide: BorderSide(color: Colors.black),
       child: Padding(
         padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
         child: Row(
@@ -176,7 +231,7 @@ class _LoginPageState extends State<LoginPage> {
                 'Sign in with Google',
                 style: TextStyle(
                   fontSize: 20,
-                  color: Colors.grey,
+                  color: Colors.black,
                 ),
               ),
             )
