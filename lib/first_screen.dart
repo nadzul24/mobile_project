@@ -61,7 +61,13 @@ class FirstScreen extends StatelessWidget {
               SizedBox(height: 40),
               RaisedButton(
                 onPressed: () {
-                  Navigator.of(context).pushNamed(Home.home);
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return Home(email);
+                      },
+                    ),
+                  );
                 },
                 color: Colors.deepPurple,
                 child: Padding(

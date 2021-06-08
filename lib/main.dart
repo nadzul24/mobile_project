@@ -1,5 +1,6 @@
 import 'package:daftar_buku/buku/homeBuku.dart';
 import 'package:daftar_buku/register_page.dart';
+import 'package:daftar_buku/sign_in.dart';
 import 'package:flutter/material.dart';
 import 'homaPage.dart';
 import 'kategori/homeKategori.dart';
@@ -12,6 +13,7 @@ class MyApp extends StatelessWidget {
   final routes = <String, WidgetBuilder>{
     RegisterPage.tag: (context) => RegisterPage(),
   };
+  String us;
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -22,9 +24,9 @@ class MyApp extends StatelessWidget {
       home: LoginPage(),
       routes: {
         RegisterPage.tag: (context) => RegisterPage(),
-        Home.home: (_) => Home(),
-        HomeBuku.bukuPage: (_) => HomeBuku(),
-        HomeKategori.kategoriPage: (_) => HomeKategori(),
+        Home.home: (_) => Home(us),
+        HomeBuku.bukuPage: (_) => HomeBuku(us),
+        HomeKategori.kategoriPage: (_) => HomeKategori(us),
       },
     );
   }

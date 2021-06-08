@@ -4,6 +4,8 @@ import '../drawerMenu.dart';
 //pendukung program asinkron
 class HomeKategori extends StatefulWidget {
   static const kategoriPage = '/homeKategori';
+  final email;
+  HomeKategori(this.email);
   @override
   HomeKategoriState createState() => HomeKategoriState();
 }
@@ -14,6 +16,7 @@ class HomeKategoriState extends State<HomeKategori> {
   // List<Item> itemList;
   @override
   Widget build(BuildContext context) {
+    String us = widget.email;
     // if (itemList == null) {
     //   itemList = List<Item>();
     // }
@@ -22,7 +25,7 @@ class HomeKategoriState extends State<HomeKategori> {
         title: Text('Daftar Kategori'),
         backgroundColor: Colors.yellow[600],
       ),
-      drawer: DrawerMenu(),
+      drawer: DrawerMenu(us),
       // body: Column(children: [
       //   Expanded(
       //     child: createListView(),

@@ -6,6 +6,8 @@ import 'homaPage.dart';
 import 'kategori/homeKategori.dart';
 
 class DrawerMenu extends StatelessWidget {
+  final user;
+  DrawerMenu(this.user);
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -19,13 +21,13 @@ class DrawerMenu extends StatelessWidget {
               child: Column(
                 children: <Widget>[
                   Container(
-                    width: 80,
+                    width: 150,
                     height: 120,
                     margin: EdgeInsets.only(
                       top: 15,
                       bottom: 10,
                       left: 15,
-                      right: 15, 
+                      right: 15,
                     ),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -82,7 +84,13 @@ class DrawerMenu extends StatelessWidget {
               ),
             ),
             onTap: () {
-              Navigator.of(context).pushNamed(HomeBuku.bukuPage);
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) {
+                    return HomeBuku(user);
+                  },
+                ),
+              );
             },
           ),
           ListTile(

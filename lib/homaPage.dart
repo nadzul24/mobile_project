@@ -4,15 +4,18 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatelessWidget {
+  final user;
+  Home(this.user);
   static const home = '/home';
   @override
   Widget build(BuildContext context) {
+    String us = user;
     return Scaffold(
       appBar: AppBar(
         title: Text('Home Page'),
         backgroundColor: Colors.yellow[600],
       ),
-      drawer: DrawerMenu(),
+      drawer: DrawerMenu(us),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -34,23 +37,26 @@ class Home extends StatelessWidget {
                         ),
                       ),
                       SizedBox(width: 16),
-                      Expanded(
-                        child: Divider(thickness: 3, color: Colors.black),
-                      ),
+                      // Expanded(
+                      //   child: Divider(thickness: 3, color: Colors.black),
+                      // ),
                       SizedBox(width: 40),
                     ],
                   ),
                   Text(
-                    name,
+                    email,
                     style: TextStyle(
-                        fontSize: 20,
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold),
+                      fontSize: 20,
+                      color: Colors.black,
+                    ),
                     // style: TextStyle(
                     //     color: Colors.black,
                     //     fontWeight: FontWeight.w600,
                     //     fontSize: 20,
                     // letterSpacing: 5),
+                  ),
+                  Expanded(
+                    child: Divider(thickness: 1, color: Colors.black),
                   ),
                   // Spasi
                   SizedBox(height: 30),
