@@ -1,8 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:daftar_buku/FirestoreDb/Database.dart';
 import 'package:flutter/material.dart';
-import 'FirestoreDb/Database.dart';
+import '../FirestoreDb/Database.dart';
 
 class EntryForm extends StatefulWidget {
+  final String kategori;
   final String title;
   final String penulis;
   final String penerbit;
@@ -13,15 +15,25 @@ class EntryForm extends StatefulWidget {
   final String id;
   final String docId;
 
-  EntryForm(this.title, this.penulis, this.penerbit, this.kota, this.tahun,
-      this.price, this.stock, this.id, this.docId);
+  EntryForm(this.kategori, this.title, this.penulis, this.penerbit, this.kota,
+      this.tahun, this.price, this.stock, this.id, this.docId);
   @override
-  EntryFormState createState() => EntryFormState(this.title, this.penulis,
-      this.penerbit, this.kota, this.tahun, this.price, this.stock, id, docId);
+  EntryFormState createState() => EntryFormState(
+      this.kategori,
+      this.title,
+      this.penulis,
+      this.penerbit,
+      this.kota,
+      this.tahun,
+      this.price,
+      this.stock,
+      id,
+      docId);
 }
 
 //class controller
 class EntryFormState extends State<EntryForm> {
+  String kategori;
   String title;
   String penulis;
   String penerbit;
@@ -32,9 +44,10 @@ class EntryFormState extends State<EntryForm> {
   String id;
   String docId;
 
-  EntryFormState(this.title, this.penulis, this.penerbit, this.kota, this.tahun,
-      this.price, this.stock, this.id, this.docId);
+  EntryFormState(this.kategori, this.title, this.penulis, this.penerbit,
+      this.kota, this.tahun, this.price, this.stock, this.id, this.docId);
 
+  var selectedCurrency;
   TextEditingController titleController = TextEditingController();
   TextEditingController penulisController = TextEditingController();
   TextEditingController penerbitController = TextEditingController();
@@ -47,6 +60,7 @@ class EntryFormState extends State<EntryForm> {
   Widget build(BuildContext context) {
     //kondisi
     if (title != null) {
+      selectedCurrency = kategori;
       titleController.text = title;
       penulisController.text = penulis;
       penerbitController.text = penerbit;
@@ -65,6 +79,55 @@ class EntryFormState extends State<EntryForm> {
           padding: EdgeInsets.only(top: 15.0, left: 10.0, right: 10.0),
           child: ListView(
             children: <Widget>[
+              //dropdown kategori
+              StreamBuilder<QuerySnapshot>(
+                  stream: FirestoreDB().readKategori(id),
+                  builder: (context, snapshot) {
+                    if (!snapshot.hasData)
+                      const Text("Loading.....");
+                    else {
+                      List<DropdownMenuItem> currencyItems = [];
+                      for (int i = 0; i < snapshot.data.docs.length; i++) {
+                        DocumentSnapshot snap = snapshot.data.docs[i];
+                        currencyItems.add(
+                          DropdownMenuItem(
+                            child: Text(
+                              snap['kategori'],
+                              style: TextStyle(color: Color(0xff11b719)),
+                            ),
+                            value: "${snap['kategori']}",
+                          ),
+                        );
+                      }
+                      return Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          SizedBox(width: 50.0),
+                          DropdownButton(
+                            items: currencyItems,
+                            onChanged: (currencyValue) {
+                              final snackBar = SnackBar(
+                                content: Text(
+                                  'Kategori yang dipilih $currencyValue',
+                                  style: TextStyle(color: Color(0xff11b719)),
+                                ),
+                              );
+                              Scaffold.of(context).showSnackBar(snackBar);
+                              setState(() {
+                                selectedCurrency = currencyValue;
+                              });
+                            },
+                            value: selectedCurrency,
+                            isExpanded: false,
+                            hint: new Text(
+                              "Pilih Kategori",
+                              style: TextStyle(color: Color(0xff11b719)),
+                            ),
+                          ),
+                        ],
+                      );
+                    }
+                  }),
               // judul
               Padding(
                 padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
@@ -212,6 +275,7 @@ class EntryFormState extends State<EntryForm> {
                             // tambah data
                             FirestoreDB.addItem(
                                 i: id,
+                                kategori: selectedCurrency,
                                 title: titleController.text,
                                 penulis: penulisController.text,
                                 penerbit: penerbitController.text,
@@ -223,6 +287,7 @@ class EntryFormState extends State<EntryForm> {
                             // ubah data
                             FirestoreDB.updateItem(
                                 uid: id,
+                                kategori: selectedCurrency,
                                 title: titleController.text,
                                 penulis: penulisController.text,
                                 penerbit: penerbitController.text,

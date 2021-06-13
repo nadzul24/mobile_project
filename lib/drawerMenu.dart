@@ -102,7 +102,13 @@ class DrawerMenu extends StatelessWidget {
               ),
             ),
             onTap: () {
-              Navigator.of(context).pushNamed(HomeKategori.kategoriPage);
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) {
+                    return HomeKategori(user);
+                  },
+                ),
+              );
             },
           ),
           SizedBox(height: 180),

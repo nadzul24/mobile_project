@@ -1,5 +1,7 @@
+import 'package:daftar_buku/FirestoreDb/Database.dart';
 import 'package:daftar_buku/first_screen.dart';
 import 'package:daftar_buku/sign_in.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -10,6 +12,7 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegPageState extends State<RegisterPage> {
+  FirebaseAuth _auth = FirebaseAuth.instance;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passController = TextEditingController();
@@ -108,6 +111,7 @@ class _RegPageState extends State<RegisterPage> {
                             _emailController.text, _passController.text)
                         .then((result) {
                       if (result != null) {
+                        FirestoreDB.userUid = _auth.currentUser.uid;
                         Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: (context) {

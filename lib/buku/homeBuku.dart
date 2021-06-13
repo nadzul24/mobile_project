@@ -1,4 +1,4 @@
-import 'package:daftar_buku/EntryForm.dart';
+import 'package:daftar_buku/buku/EntryFormBuku.dart';
 import 'package:daftar_buku/FirestoreDb/Database.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -39,7 +39,7 @@ class HomeBukuState extends State<HomeBuku> {
                 child: Icon(Icons.add),
                 onPressed: () async {
                   var buku = await navigateToEntryForm(context, null, null,
-                      null, null, null, null, null, us, null);
+                      null, null, null, null, null, null, us, null);
                 },
               ),
             ),
@@ -51,6 +51,7 @@ class HomeBukuState extends State<HomeBuku> {
 
   Future<FirestoreDB> navigateToEntryForm(
       BuildContext context,
+      String kategori,
       String title,
       String penulis,
       String penerbit,
@@ -62,8 +63,8 @@ class HomeBukuState extends State<HomeBuku> {
       String docId) async {
     var result = await Navigator.push(context,
         MaterialPageRoute(builder: (BuildContext context) {
-      return EntryForm(
-          title, penulis, penerbit, kota, tahun, price, stock, id, docId);
+      return EntryForm(kategori, title, penulis, penerbit, kota, tahun, price,
+          stock, id, docId);
     }));
     return result;
   }
@@ -85,6 +86,7 @@ class HomeBukuState extends State<HomeBuku> {
             itemBuilder: (context, index) {
               var noteInfo = snapshot.data.docs[index].data();
               String docID = snapshot.data.docs[index].id;
+              String kategori = noteInfo['kategori'];
               String title = noteInfo['title'];
               String penulis = noteInfo['penulis'];
               String penerbit = noteInfo['penerbit'];
@@ -105,7 +107,7 @@ class HomeBukuState extends State<HomeBuku> {
                     title,
                     style: textStyle,
                   ),
-                  subtitle: Text(penulis + ' - ' + tahun.toString()),
+                  subtitle: Text(tahun.toString()),
                   trailing: GestureDetector(
                     child: DropdownButton<String>(
                       underline: SizedBox(),
@@ -120,8 +122,18 @@ class HomeBukuState extends State<HomeBuku> {
                         if (changeValue == "Delete") {
                           FirestoreDB.deleteItem(uid: a, docId: docID);
                         } else if (changeValue == "Update") {
-                          await navigateToEntryForm(context, title, penulis,
-                              penerbit, kota, tahun, price, stock, a, docID);
+                          await navigateToEntryForm(
+                              context,
+                              kategori,
+                              title,
+                              penulis,
+                              penerbit,
+                              kota,
+                              tahun,
+                              price,
+                              stock,
+                              a,
+                              docID);
                         }
                         ;
                       },
